@@ -196,7 +196,7 @@ Cubic Curve :
 
 The library support [CPM](https://github.com/cpm-cmake/CPM.cmake).
 
-```
+```cmake
 include(CPM.cmake)
 CPMAddPackage(
   GIT_REPOSITORY https://github.com/OlivierLDff/bezierpp
