@@ -24,19 +24,19 @@
 namespace bezierpp {
 
 template<>
-float getNorm<QVector2D, float>(const QVector2D& value)
+inline float getNorm<QVector2D, float>(const QVector2D& value)
 {
     return value.length();
 }
 
 template<>
-float getNorm<QVector3D, float>(const QVector3D& value)
+inline float getNorm<QVector3D, float>(const QVector3D& value)
 {
     return value.length();
 }
 
 template<>
-float getNorm<QVector4D, float>(const QVector4D& value)
+inline float getNorm<QVector4D, float>(const QVector4D& value)
 {
     return value.length();
 }
