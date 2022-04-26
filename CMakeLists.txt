@@ -82,7 +82,7 @@ target_sources(${BEZIERPP_TARGET}
     $<INSTALL_INTERFACE:include/bezierpp/qt.hpp>
 )
 
-target_compile_features(${BEZIERPP_TARGET} INTERFACE cxx_std_11)
+target_compile_features(${BEZIERPP_TARGET} INTERFACE cxx_std_17)
 
 target_include_directories(${BEZIERPP_TARGET}
   INTERFACE
