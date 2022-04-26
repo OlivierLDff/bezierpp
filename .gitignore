@@ -1,0 +1,27 @@
+# Allow in source build
+[Bb]uild*/
+# Ignore qt files when importing CMakeLists
+*.users
+# Ignore CLion project files
+*.idea
+# For macOs users
+.DS_Store
+# Ignore sublime merge file that can be created on merge fail
+Sublimerge*
+# vscode users
+/.vscode
+# created by cmake
+/cpm_modules
+# Qt-Creator auto generated file
+CMakeLists.txt.user
+
+# downloaded models
+data/models/
+
+# Allow to create a .cpm folder to share dependencies along build folder
+.cpm/*
+
+__pycache__
+*.py[cod]
+*.egg-info
+*env*
