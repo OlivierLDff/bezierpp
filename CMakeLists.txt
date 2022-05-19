@@ -74,10 +74,10 @@ add_library(${BEZIERPP_TARGET} INTERFACE)
 add_library(${BEZIERPP_TARGET}::${BEZIERPP_TARGET} ALIAS ${BEZIERPP_TARGET})
 
 target_sources(${BEZIERPP_TARGET}
-  PUBLIC
+  INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/bezierpp/bezierpp.hpp>
     $<INSTALL_INTERFACE:include/bezierpp/bezierpp.hpp>
-  PUBLIC
+  INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/bezierpp/qt.hpp>
     $<INSTALL_INTERFACE:include/bezierpp/qt.hpp>
 )

@@ -36,9 +36,6 @@ jobs:
                 -B build -S .
         shell: bash
       -
-        name: 🔨 bezierpp
-        run: cmake --build build --config "${{ matrix.build-type }}" --target "bezierpp" -j
-      -
         name: 🔨 bezierpp_eigen
         run: cmake --build build --config "${{ matrix.build-type }}" --target "bezierpp_eigen" -j
       -
