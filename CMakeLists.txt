@@ -17,11 +17,13 @@
 
 cmake_minimum_required(VERSION 3.14.0 FATAL_ERROR)
 
-
 # ──── Include guards ────
 
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-  message(FATAL_ERROR "In-source builds not allowed. " "Please make a new directory (called a build directory) and run CMake from there.")
+  message(
+    FATAL_ERROR "In-source builds not allowed. "
+                "Please make a new directory (called a build directory) and run CMake from there."
+  )
 endif()
 
 # ──── Main Project behavior ────
@@ -35,26 +37,26 @@ endif()
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE
-    "Release"
-    CACHE STRING "Choose Release or Debug" FORCE
+      "Release"
+      CACHE STRING "Choose Release or Debug" FORCE
   )
 endif()
 
 # ───── 🔧 Configuration ─────
 
 set(BEZIERPP_TARGET
-  "bezierpp"
-  CACHE STRING "Target Name"
+    "bezierpp"
+    CACHE STRING "Target Name"
 )
 
 set(BEZIERPP_ENABLE_EXAMPLES
-  OFF
-  CACHE BOOL "Create an install target."
+    OFF
+    CACHE BOOL "Create an install target."
 )
 
 set(BEZIERPP_ENABLE_INSTALL
-  ${BEZIERPP_MAIN_PROJECT}
-  CACHE BOOL "Create an install target."
+    ${BEZIERPP_MAIN_PROJECT}
+    CACHE BOOL "Create an install target."
 )
 
 # ───── Project ─────
@@ -73,21 +75,19 @@ add_library(${BEZIERPP_TARGET} INTERFACE)
 
 add_library(${BEZIERPP_TARGET}::${BEZIERPP_TARGET} ALIAS ${BEZIERPP_TARGET})
 
-target_sources(${BEZIERPP_TARGET}
-  INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/bezierpp/bezierpp.hpp>
-    $<INSTALL_INTERFACE:include/bezierpp/bezierpp.hpp>
-  INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/bezierpp/qt.hpp>
-    $<INSTALL_INTERFACE:include/bezierpp/qt.hpp>
+target_sources(
+  ${BEZIERPP_TARGET}
+  INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/bezierpp/bezierpp.hpp>
+            $<INSTALL_INTERFACE:include/bezierpp/bezierpp.hpp>
+  INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/bezierpp/qt.hpp>
+            $<INSTALL_INTERFACE:include/bezierpp/qt.hpp>
 )
 
 target_compile_features(${BEZIERPP_TARGET} INTERFACE cxx_std_17)
 
-target_include_directories(${BEZIERPP_TARGET}
-  INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-    $<INSTALL_INTERFACE:include>
+target_include_directories(
+  ${BEZIERPP_TARGET} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+                               $<INSTALL_INTERFACE:include>
 )
 
 # ───── 🚀 Examples ─────
@@ -98,7 +98,8 @@ if(BEZIERPP_ENABLE_EXAMPLES)
   if(TARGET Eigen3::Eigen)
     message(STATUS "Add bezierpp_eigen example")
     add_executable(bezierpp_eigen samples/bezierpp_eigen.cpp)
-    target_link_libraries(bezierpp_eigen
+    target_link_libraries(
+      bezierpp_eigen
       PRIVATE Eigen3::Eigen
       PRIVATE ${BEZIERPP_TARGET}
     )
@@ -110,7 +111,8 @@ if(BEZIERPP_ENABLE_EXAMPLES)
   if(TARGET Qt::Gui)
     message(STATUS "Add bezierpp_qt example")
     add_executable(bezierpp_qt samples/bezierpp_qt.cpp)
-    target_link_libraries(bezierpp_qt
+    target_link_libraries(
+      bezierpp_qt
       PRIVATE Qt::Gui
       PRIVATE ${BEZIERPP_TARGET}
     )
