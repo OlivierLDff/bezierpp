@@ -59,6 +59,10 @@ set(BEZIERPP_ENABLE_INSTALL
     CACHE BOOL "Create an install target."
 )
 
+if(BEZIERPP_ENABLE_INSTALL)
+  include(GNUInstallDirs)
+endif()
+
 # ───── Project ─────
 
 include(cmake/Version.cmake)
@@ -78,16 +82,16 @@ add_library(${BEZIERPP_TARGET}::${BEZIERPP_TARGET} ALIAS ${BEZIERPP_TARGET})
 target_sources(
   ${BEZIERPP_TARGET}
   INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/bezierpp/bezierpp.hpp>
-            $<INSTALL_INTERFACE:include/bezierpp/bezierpp.hpp>
+            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/bezierpp/bezierpp.hpp>
   INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/bezierpp/qt.hpp>
-            $<INSTALL_INTERFACE:include/bezierpp/qt.hpp>
+            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/bezierpp/qt.hpp>
 )
 
 target_compile_features(${BEZIERPP_TARGET} INTERFACE cxx_std_17)
 
 target_include_directories(
   ${BEZIERPP_TARGET} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-                               $<INSTALL_INTERFACE:include>
+                               $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 # ───── 🚀 Examples ─────
@@ -133,7 +137,7 @@ if(BEZIERPP_ENABLE_INSTALL)
     VERSION ${PROJECT_VERSION}
     BINARY_DIR ${PROJECT_BINARY_DIR}
     INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src
-    INCLUDE_DESTINATION include
+    INCLUDE_DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     NAMESPACE bezierpp
     COMPATIBILITY SameMinorVersion
   )
